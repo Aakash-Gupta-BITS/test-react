@@ -4,7 +4,7 @@ const HomePage = ({Content}) => {
     return ( 
         <div>
             <p>
-                {Content}
+                {JSON.stringify(Content)}
             </p>
         </div>
      );

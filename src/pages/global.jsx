@@ -5,45 +5,45 @@ import HomePage from "./homepage";
 
 class Global extends Component {
   state = {
-    isLoggedIn: auth.isLoggedIn(),
-    user: auth.user()
+    isLoggedIn: false,
+    user: null,
+    isLoaded: false
   };
+
+  componentDidMount() {
+    auth.onAuthChange((usr) => {
+      this.setState({ user: usr, isLoggedIn: usr !== null, isLoaded: true });
+    });
+  }
 
   onSignInClick = async () => {
     await auth.logIn(
       (result) => {
         console.log("Signed in successfully");
-        this.updateState();
       },
       (err) => {
         console.log(err);
-        this.updateState();
         alert(err);
       }
     );
   };
 
-  onSignOutClick = () => {
-    auth.logOut();
-    this.updateState();
-  };
-
-  updateState() {
-    const usr = auth.user();
-    console.log("Got from storage: ", usr);
-    this.setState({ isLoggedIn: auth.isLoggedIn(), user: auth.user() });
-  }
-
   render() {
     return (
       <React.Fragment>
-        <LoginPage
+        {
+          !this.state.isLoaded && <div class="spinner-border text-primary" role="status">
+          <span class="sr-only"></span>
+        </div>
+        }
+        {
+          this.state.isLoaded && <div><LoginPage
           isLoggedIn={this.state.isLoggedIn}
           onSignInClick={this.onSignInClick}
-          onSignOutClick={this.onSignOutClick}
+          onSignOutClick={() => auth.logOut()}
         />
-        <HomePage 
-        Content={this.state.user}/>
+        <HomePage Content={this.state.user} />
+            </div>}
       </React.Fragment>
     );
   }

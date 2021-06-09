@@ -8,7 +8,7 @@ class LoginPage extends Component {
     const { isLoggedIn, onSignInClick, onSignOutClick } = this.props;
     
     return (
-      <React.Fragment>
+      <div>
         <GoogleSignInButton
           onClick={async  () => await onSignInClick()}
           width="191"
@@ -25,7 +25,7 @@ class LoginPage extends Component {
             </label>
           )}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

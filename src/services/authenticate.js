@@ -1,52 +1,44 @@
 import firebase from "firebase";
-import firebaseCommon from "./config"
+import firebaseCommon from "./config";
 require("firebase/auth");
 
 const storageVar = firebaseCommon.authStorageVar;
 firebaseCommon.initializeApp();
-
 const provider = new firebase.auth.GoogleAuthProvider();
 
 function getLoggedInUser() {
-  const str = localStorage.getItem(storageVar);
-  if (!str) return null;
-  const res = JSON.parse(str);
-  return res;
-}
-
-function saveUser(auth) {
-  console.log("Saving: ", auth);
-  localStorage.setItem(storageVar, JSON.stringify(auth));
-}
-
-function removeUser() {
-  localStorage.removeItem(storageVar);
+  return firebase.auth().currentUser;
 }
 
 const logIn = async (result, error) => {
-  let user = firebase.auth().currentUser || getLoggedInUser();
+  let user = firebase.auth().currentUser;
 
-  if (user) result(user);
-  else
-    try {
-      const res = await firebase.auth().signInWithPopup(provider);
+  if (user) {
+    result(user);
+    return;
+  }
 
-      if (res.additionalUserInfo.profile.hd !== "pilani.bits-pilani.ac.in") {
-        logOut();
-        throw new Error("User not from BITS Pilani Campus");
+  firebase
+    .auth()
+    .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(() => {
+      return firebase.auth().signInWithPopup(provider);
+    })
+    .then((res) => {
+      try {
+        if (res.additionalUserInfo.profile.hd !== "pilani.bits-pilani.ac.in") {
+          logOut();
+          throw new Error("User not from BITS Pilani Campus");
+        }
+        console.log("Got from server: ", res);
+        result(res);
+      } catch (ex) {
+        error(ex);
       }
-      console.log("Got from server: ", res);
-      saveUser(res);
-      result(res);
-    } catch (ex) {
-      removeUser();
-
-      error(ex);
-    }
+    });
 };
 
-const logOut = (result, error) => {
-  removeUser();
+const logOut = (result, error) =>
   firebase
     .auth()
     .signOut()
@@ -58,12 +50,15 @@ const logOut = (result, error) => {
         console.error("Sign Out Error", error);
       }
     );
-};
 
-const isLoggedIn = () => {
-  if (localStorage.getItem(storageVar)) return true;
-  return false;
-};
+const isLoggedIn = () => (firebase.auth().currentUser ? true : false);
+
+const onAuthChange = (callback) =>{
+
+  firebase.auth().onAuthStateChanged((user) => {
+    callback(user);
+  });
+}
 
 firebase.analytics();
 
@@ -71,7 +66,7 @@ const exprts = {
   logIn,
   logOut,
   isLoggedIn,
-  user: getLoggedInUser
+  onAuthChange,
 };
 
 export default exprts;
