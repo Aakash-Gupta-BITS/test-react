@@ -29,17 +29,17 @@ export const fillMembers = () => {
   }
 };
 
-export const getMember = (email, success, error) => {
-  members
-    .doc(email)
-    .get()
-    .then(function (doc) {
-      if (doc && doc.exists) {
-        success(doc.data());
-      }
-      success("");
-    })
-    .catch(function (err) {
-      error(err);
-    });
+export const getMember = (email) => {
+  return new Promise(function (resolve, reject) {
+    members
+      .doc(email)
+      .get()
+      .then(function (doc) {
+        if (doc && doc.exists) resolve(doc.data());
+        else resolve(null);
+      })
+      .catch(function (err) {
+        reject(err);
+      });
+  });
 };

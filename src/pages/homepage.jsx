@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import ReactJson from 'react-json-view';
 
-const HomePage = ({Content}) => {
-    return ( 
-        <div>
-            <p>
-                {JSON.stringify(Content)}
-            </p>
-        </div>
-     );
+class HomePage extends Component {
+  
+  render() {
+    return this.props.Content && (<ReactJson src={this.props.Content}/>
+    );
+  }
 }
- 
+
 export default HomePage;

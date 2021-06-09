@@ -2,13 +2,8 @@ import firebase from "firebase";
 import firebaseCommon from "./config";
 require("firebase/auth");
 
-const storageVar = firebaseCommon.authStorageVar;
 firebaseCommon.initializeApp();
 const provider = new firebase.auth.GoogleAuthProvider();
-
-function getLoggedInUser() {
-  return firebase.auth().currentUser;
-}
 
 const logIn = async (result, error) => {
   let user = firebase.auth().currentUser;
@@ -30,7 +25,6 @@ const logIn = async (result, error) => {
           logOut();
           throw new Error("User not from BITS Pilani Campus");
         }
-        console.log("Got from server: ", res);
         result(res);
       } catch (ex) {
         error(ex);
@@ -53,12 +47,11 @@ const logOut = (result, error) =>
 
 const isLoggedIn = () => (firebase.auth().currentUser ? true : false);
 
-const onAuthChange = (callback) =>{
-
+const onAuthChange = (callback) => {
   firebase.auth().onAuthStateChanged((user) => {
     callback(user);
   });
-}
+};
 
 firebase.analytics();
 
