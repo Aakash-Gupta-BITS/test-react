@@ -1,34 +1,52 @@
 import React, { Component } from "react";
-import normalLogo from "./resources/btn_google_signin_light_normal_web.png";
-import pressedLogo from "./resources/btn_google_signin_light_pressed_web.png";
-import firebase from "./services/fireauth";
+import GoogleSignInButton from "./components/login/googleSignInButton";
+import auth from "./services/authenticate";
 
 class LoginPage extends Component {
   state = {
-    imgLogo: normalLogo,
-    authenticated: false
+    isLoggedIn: auth.isLoggedIn(),
   };
 
+  updateState() {
+    this.setState({ isLoggedIn: auth.isLoggedIn() });
+  }
+
   render() {
+    const { isLoggedIn } = this.state;
+    
     return (
       <React.Fragment>
-        <label
-          type="button"
-          style={{visibility: !this.state.authenticated ? 'visible' : 'hidden' }}
-          onMouseDown={() => this.setState({ imgLogo: pressedLogo })}
-          onMouseUp={() => this.setState({ imgLogo: normalLogo })}
+        <GoogleSignInButton
           onClick={async () => {
-            await firebase.auth(result =>{
-                alert("Success!!");
-                this.setState({authenticated: true});
-            },
-            err =>{
+            await auth.logIn(
+              (result) => {
+                console.log("Signed in successfully");
+                this.updateState();
+              },
+              (err) => {
+                console.log(err);
+                this.updateState();
                 alert(err);
-            });
+              }
+            );
           }}
-        >
-          <img src={this.state.imgLogo} alt="Sign in with Google" width="191" />
-        </label>
+          width="191"
+          display={!isLoggedIn}
+        />
+        <div>
+          {isLoggedIn && (
+            <label
+              type="button"
+              className="btn btn-primary"
+              onClick={() => {
+                auth.logOut();
+                this.updateState();
+              }}
+            >
+              Sign Out
+            </label>
+          )}
+        </div>
       </React.Fragment>
     );
   }

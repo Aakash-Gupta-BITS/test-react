@@ -5,6 +5,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import LoginPage from './loginPage';
 
 ReactDOM.render(
-  <LoginPage/>,
+  <LoginPage />,
   document.getElementById('root')
 );
