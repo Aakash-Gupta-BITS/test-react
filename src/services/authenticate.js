@@ -1,9 +1,11 @@
 import firebase from "firebase";
-import vars from "./config"
+import firebaseCommon from "./config"
 require("firebase/auth");
 
-const storageVar = vars.authStorageVar;
-const firebaseConfig = vars.firebaseConfig;
+const storageVar = firebaseCommon.authStorageVar;
+firebaseCommon.initializeApp();
+
+const provider = new firebase.auth.GoogleAuthProvider();
 
 function getLoggedInUser() {
   const str = localStorage.getItem(storageVar);
@@ -18,9 +20,6 @@ function saveUser(auth) {
 function removeUser() {
   localStorage.removeItem(storageVar);
 }
-
-firebase.initializeApp(firebaseConfig);
-const provider = new firebase.auth.GoogleAuthProvider();
 
 const logIn = async (result, error) => {
   let user = firebase.auth().currentUser || getLoggedInUser();
