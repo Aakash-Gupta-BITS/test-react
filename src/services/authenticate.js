@@ -68,6 +68,7 @@ const exprts = {
   logIn,
   logOut,
   isLoggedIn,
+  user: getLoggedInUser
 };
 
 export default exprts;

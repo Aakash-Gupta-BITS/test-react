@@ -162,4 +162,14 @@ export const memberList = [
     hackerearth: "",
     hackerrank: "",
   },
+  {
+    name: "Tanish Bansal",
+    email: "f20190356@pilani.bits-pilani.ac.in",
+    bitsId: "2019A8PS0356P",
+    codechef: "https://www.codechef.com/users/ab_9102",
+    codeforces: "http://codeforces.com/profile/bansaltanish149",
+    atcoder: "",
+    hackerearth: "",
+    hackerrank: "",
+  }
 ];

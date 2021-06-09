@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import "bootstrap/dist/css/bootstrap.css";
-import LoginPage from './loginPage';
+import Global from './pages/global';
 
 ReactDOM.render(
-  <LoginPage />,
+  <Global/>,
   document.getElementById('root')
 );
