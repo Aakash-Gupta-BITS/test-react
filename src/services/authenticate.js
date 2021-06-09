@@ -10,11 +10,13 @@ const provider = new firebase.auth.GoogleAuthProvider();
 function getLoggedInUser() {
   const str = localStorage.getItem(storageVar);
   if (!str) return null;
-  return JSON.stringify(str);
+  const res = JSON.parse(str);
+  return res;
 }
 
 function saveUser(auth) {
-  localStorage.setItem(storageVar, auth);
+  console.log("Saving: ", auth);
+  localStorage.setItem(storageVar, JSON.stringify(auth));
 }
 
 function removeUser() {
@@ -33,6 +35,7 @@ const logIn = async (result, error) => {
         logOut();
         throw new Error("User not from BITS Pilani Campus");
       }
+      console.log("Got from server: ", res);
       saveUser(res);
       result(res);
     } catch (ex) {
