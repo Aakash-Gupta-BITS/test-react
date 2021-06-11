@@ -124,7 +124,7 @@ export const memberList = [
   },
   {
     name: "Kalash Shah",
-    email: "f20180213@pilani.bits-pilani.ac.in ",
+    email: "f20180213@pilani.bits-pilani.ac.in",
     bitsId: "2018A7PS0213P ",
     codechef: "https://www.codechef.com/users/kalashshah11",
     codeforces: "https://codeforces.com/profile/Hypersomniac",
