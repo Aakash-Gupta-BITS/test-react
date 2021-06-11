@@ -6,7 +6,7 @@ const storage = vars.getStorage();
 class ProfileImage extends Component {
 	state = {imglink: null};
 	async componentDidMount() {
-		console.log(this.props);
+		// console.log(this.props);
 		await this.getLink(this.props.Content.profileref);
 	}
 	async getLink(url){

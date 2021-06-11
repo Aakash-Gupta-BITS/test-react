@@ -41,6 +41,7 @@ class Global extends Component {
   };
 
   render() {
+    // this.state.isLoaded && console.log(this.state.childData.Component);
     return (
       <React.Fragment>
         {!this.state.isLoaded && (
@@ -56,6 +57,7 @@ class Global extends Component {
               onSignOutClick={() => auth.logOut()}
             />
             <HomePage Content={this.state.childData} />
+           
           </div>
         )}
       </React.Fragment>
