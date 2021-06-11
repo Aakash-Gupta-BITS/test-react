@@ -8,6 +8,7 @@ const template = {
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
 };
 
@@ -21,6 +22,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Aakash Gupta",
@@ -31,6 +33,7 @@ export const memberList = [
     atcoder: "https://atcoder.jp/users/AakashBitsPilani",
     hackerearth: "https://www.hackerearth.com/@aakash554",
     hackerrank: "https://www.hackerrank.com/f201808871",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Utkarsh",
@@ -41,6 +44,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Yogesh Gupta",
@@ -51,6 +55,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "https://www.hackerrank.com/noobie_2001",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Aniket Jain",
@@ -61,6 +66,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Shivansh Agarwal",
@@ -71,6 +77,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "https://www.hackerrank.com/shivanshagrawal3",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Tanveer Singh",
@@ -81,6 +88,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Anish Kasegaonkar",
@@ -91,6 +99,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "https://www.hackerrank.com/anishkgkar",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Mridul Chandak",
@@ -101,6 +110,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Siddharth Sharma ",
@@ -111,6 +121,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Chinmay Shah",
@@ -121,6 +132,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Kalash Shah",
@@ -131,6 +143,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Niket Agarwal",
@@ -141,6 +154,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Hemant Agarwal",
@@ -151,6 +165,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Ashish Pathak",
@@ -161,6 +176,7 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   },
   {
     name: "Tanish Bansal",
@@ -171,5 +187,6 @@ export const memberList = [
     atcoder: "",
     hackerearth: "",
     hackerrank: "",
+    profileref: "/Profile Images/basic.jpg",
   }
 ];

@@ -19,6 +19,7 @@ export const fillMembers = () => {
         atcoder: mem.atcoder,
         hackerearth: mem.hackerearth,
         hackerrank: mem.hackerrank,
+        profileref: mem.profileref,
       })
       .then(() => {
         console.log(mem.name + " added to database");
