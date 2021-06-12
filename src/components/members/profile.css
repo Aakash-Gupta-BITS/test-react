@@ -28,7 +28,7 @@
     min-width: 100%;
     background: rgba(245, 222, 179, 0.3);
     font-size: 21px;
-    color: white;
+    color: rgb(255, 255, 255);
     line-height: 50%;
     transition: bottom 0.7s;
 }

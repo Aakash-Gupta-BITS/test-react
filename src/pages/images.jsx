@@ -1,6 +1,6 @@
 import { Component } from "react";
 import vars from "../services/config";
-
+import basicImage from "../resources/2345244.jpg"
 const storage = vars.getStorage();
 
 class ProfileImage extends Component {
@@ -18,7 +18,7 @@ class ProfileImage extends Component {
 		}
 	}
 	render() {
-		return <img src={this.state.imglink} width = "100" height = "100"></img>;   
+		return <img src={basicImage} className="profile-image"></img>;   
 	}
 }
 export default ProfileImage;

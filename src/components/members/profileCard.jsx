@@ -26,19 +26,19 @@ const ProfileCard = (props) => {
         profileref,
         onInfoClick
     } = props.Content;
-    console.log(props.Content);
+    // console.log(props.Content);
     // TODO: add component. If any of profile linnk is not available, don't show that icon
     // console.log(this.props);
     return ( 
-        <React.Fragment>
+        // <React.Fragment>
             <div className={profileUp? "profile-text-up profile-card": "profile-card"} onMouseOver={bringUp} onMouseLeave={bringDown}>
                 {/* <img src="image.jpeg" alt="Image" className="profile-image"/> */}
-                <ProfileImage Content = {props.Content}/>
+                <ProfileImage Content = {props.Content} />
                 <ProfileText name={name}
                 position="Member" year={email.substr(1,4)} atcoder = {atcoder} codeforces = {codeforces} codechef = {codechef}
-                gmail={"mailto:" + {email}}/>
+                gmail={"mailto:" + email}/>
             </div>
-        </React.Fragment>
+        // </React.Fragment>
      );
 }
  
