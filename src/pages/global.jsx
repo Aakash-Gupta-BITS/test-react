@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import LoginPage from "./loginPage";
 import auth from "../services/authenticate";
 import HomePage from "./homepage";
-import { getMember } from "../services/database/members";
+import { getMember } from "../services/members";
 
 class Global extends Component {
   state = {
