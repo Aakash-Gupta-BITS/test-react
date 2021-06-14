@@ -67,6 +67,7 @@ class Global extends Component {
   };
 
   render() {
+    // this.state.isLoaded && console.log(this.state.childData.Component);
     return (
       <React.Fragment>
         {this.state.isWaiting && (

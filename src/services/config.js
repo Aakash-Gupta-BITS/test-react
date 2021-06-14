@@ -20,11 +20,14 @@ const initializeApp = () => {
 const getFirestore = () =>{
     return firebase.firestore();
 }
-
+const getStorage = () =>{
+  return firebase.storage();
+}
 const vars = {
     authStorageVar,
     initializeApp,
-    getFirestore
+    getFirestore,
+    getStorage,
 };
 
 export default vars;
