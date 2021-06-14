@@ -1,6 +1,6 @@
 import { Component } from "react";
 import vars from "../services/config";
-import basicImage from "../resources/2345244.jpg"
+import basicImage from "../resources/anime-digital-art-artwork-2d-portrait-display-hd-wallpaper-preview.jpg"
 const storage = vars.getStorage();
 
 class ProfileImage extends Component {

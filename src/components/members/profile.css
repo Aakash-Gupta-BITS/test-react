@@ -51,12 +51,18 @@
       max-width: 100%;
       border-radius: 9px;
       position: absolute;
+      object-fit: contain;
   }
   
   .profile-image {
       top: 0;
       left: 0;
       max-height: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      filter: none;
+      object-fit: cover;
   }
   
   .profile-text {
@@ -65,17 +71,25 @@
       min-height: 70%;
       max-height: 100%;
       min-width: 100%;
-      background: rgba(245, 222, 179, 0.3);
+      background: rgba(231, 137, 166, 0.555);
       font-size: 21px;
-      color: white;
+      color: black;
       line-height: 50%;
-      transition: bottom 0.7s;
+      transition: bottom 1s;
+  }
+
+  .profile-image {
+      transition: filter 0.7s;
   }
   
   .profile-text-up .profile-text {
       bottom: 0;
   }
   
+  .profile-text-up .profile-image {
+      filter: blur(4px);
+  }
+
   .profile-page {
       display: flex;
       justify-content: center;
