@@ -9,13 +9,13 @@ const ProfileText = (props) => {
                 <p>{props.position}</p>
                 <p>{props.year + "  Batch"} </p>
                 <p>
-                    <a href={props.hackerearth}><SiHackerearth style={{marginRight: 30}}/></a>    
-                    <a href={props.gmail}><SiGmail style={{marginRight: 30}}/></a> 
-                    <a href={props.hackerrank}><SiHackerrank/></a>
+                    <a href={props.hackerearth} target="_blank"><SiHackerearth style={{marginRight: 30}}/></a>    
+                    <a href={props.gmail} target="_blank"><SiGmail style={{marginRight: 30}}/></a> 
+                    <a href={props.hackerrank} target="_blank"><SiHackerrank/></a>
                 </p>
                 <p>
-                    <a href={props.codechef}><SiCodechef style={{marginRight: 30}}/></a>  
-                    <a href={props.codeforces}><SiCodeforces/></a>  
+                    <a href={props.codechef} target="_blank"><SiCodechef style={{marginRight: 30}}/></a>  
+                    <a href={props.codeforces} target="_blank"><SiCodeforces/></a>  
                 </p>
             </div>
         </IconContext.Provider>
