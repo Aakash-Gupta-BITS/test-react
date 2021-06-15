@@ -4,10 +4,10 @@ import basicImage from "../resources/anime-digital-art-artwork-2d-portrait-displ
 const storage = vars.getStorage();
 
 class ProfileImage extends Component {
-	state = {imglink: null};
+	state = {imglink: basicImage};
 	async componentDidMount() {
 		// console.log(this.props);
-		await this.getLink(this.props.Content.profileref);
+		await this.getLink(this.props.Content.profileRef);
 	}
 	async getLink(url){
 		try{
@@ -18,7 +18,7 @@ class ProfileImage extends Component {
 		}
 	}
 	render() {
-		return <img src={basicImage} className="profile-image"></img>;   
+		return <img src={this.state.imglink} className="profile-image"></img>;   
 	}
 }
 export default ProfileImage;
