@@ -7,18 +7,18 @@ class ProfileImage extends Component {
 	state = {imglink: null};
 	async componentDidMount() {
 		// console.log(this.props);
-		await this.getLink(this.props.Content.profileref);
+		await this.getLink(this.props.Content.profileRef);
 	}
 	async getLink(url){
 		try{
-		const imglink = await storage.ref().child(url).getDownloadURL();
-		this.setState({imglink});
-		}catch(ex){
-		console.log(ex);
+            const imglink = await storage.ref().child(url).getDownloadURL();
+            this.setState({imglink});
+		} catch(ex){
+		    console.log(ex);
 		}
 	}
 	render() {
-		return <img src={basicImage} className="profile-image"></img>;   
+		return <img src={this.state.imglink === null ? basicImage : this.state.imglink} className="profile-image"></img>;   
 	}
 }
 export default ProfileImage;
