@@ -12,6 +12,7 @@ const firebaseConfig = {
 };
 
 const authStorageVar = "authUser";
+const serverUrl = "https://mysterious-reef-38114.herokuapp.com";
 
 const initializeApp = () => {
   if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
@@ -20,14 +21,17 @@ const initializeApp = () => {
 const getFirestore = () =>{
     return firebase.firestore();
 }
+
 const getStorage = () =>{
   return firebase.storage();
 }
+
 const vars = {
     authStorageVar,
     initializeApp,
     getFirestore,
     getStorage,
+    serverUrl
 };
 
 export default vars;
