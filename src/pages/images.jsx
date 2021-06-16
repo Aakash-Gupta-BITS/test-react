@@ -11,11 +11,12 @@ class ProfileImage extends Component {
 	}
 	async getLink(url){
 		try{
-            const imglink = await storage.ref().child(url).getDownloadURL();
-            this.setState({imglink});
+            var imglink = await storage.ref().child(url).getDownloadURL();            
 		} catch(ex){
-		    console.log(ex);
+		    // console.log(ex);
+			imglink = await storage.ref().child('/Profile Images/basic.jpg').getDownloadURL();
 		}
+		this.setState({imglink});
 	}
 	render() {
 		return <img src={this.state.imglink === null ? basicImage : this.state.imglink} className="profile-image"></img>;   

@@ -6,6 +6,6 @@ import "./components/members/profile.css"
 import Global from './pages/global';
 
 ReactDOM.render(
-  <Global/>,
+  <BrowserRouter><Router/></BrowserRouter>,
   document.getElementById('root')
 );
