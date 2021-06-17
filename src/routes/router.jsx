@@ -1,27 +1,41 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Switch , Route } from 'react-router-dom';
-import HomePage from './homepage';
-import exprts from '../services/authenticate';
-import Login  from './login'
+import React, { Component } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import HomePage from "./homepage";
+import exprts from "../services/authenticate.js";
+import Login from "./login";
+import Loading from "../components/loading";
+import firebase from "firebase";
 
 class Router extends Component {
-	state = {  }
-	render() { 
-		if(!exprts.IsAppLoaded()){
-			
-		}
-		return ( 
-			<Switch>
-				<Route path = "/signIn" component={Login}>
+  state = { isLoaded: false };
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setState({ isLoaded: true });
+    });
+  }
 
-				</Route>
-				<Route path = "/profiles" component={HomePage}/>
-				<Route path = "/" render={()=>{
-					<div><h1>Hello</h1></div>
-				}}/>
-			</Switch>
-		 );
-	}
+  render() {
+   // if (!this.state.isLoaded) return <Route component={Loading} />;
+
+    return (
+      <Switch>
+       
+        <Route path="/signIn" component={Login}></Route>
+        <Route
+          path="/loading"
+          render={() => {
+            if (!exprts.IsSignedIn()) return <Route component={Login} />;
+            return (
+              <div>
+                <h1>Hello</h1>
+              </div>
+            );
+          }}
+        ></Route>
+        <Route path="/homepage" component={HomePage} />
+      </Switch>
+    );
+  }
 }
- 
+
 export default Router;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import exprts from '../services/authenticate';
+import exprts from '../services/authenticate.js';
 const HomePage = () => {
 	return ( <label
 		type="button"

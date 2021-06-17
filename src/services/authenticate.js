@@ -36,6 +36,7 @@ class Auth {
   checkCookies = () => {
     console.log(Cookies.get("session"));
     if (Cookies.get("session")) return true;
+    console.log("False will pervail");
     return false;
   };
 
@@ -61,11 +62,12 @@ class Auth {
 
   serverLogIn = async (csrfToken) => {
     const idToken = await this.user.getIdToken(true);
+    console.log(idToken);
     return new Promise((resolve, reject) => {
       fetch(serverUrl + "/api/auth/login", {
         method: "POST",
         mode: "cors",
-        // credentials: "include",
+        credentials: "include",
         body: JSON.stringify({
           idToken: idToken,
           csrfToken: csrfToken,
@@ -154,7 +156,7 @@ const exprts = {
   SignIn,
   SignOut,
   IsSignedIn,
-  IsAppLoaded,
+  IsAppLoaded
 };
 
 export default exprts;
