@@ -1,6 +1,5 @@
 import firebase from "firebase";
 import firebaseCommon from "./config";
-import Cookies from "js-cookie";
 
 require("firebase/auth");
 
@@ -83,7 +82,6 @@ class Auth {
 
   signOut = async () => {
     return new Promise((resolve, reject) => {
-      this.clearCookie();
       firebase
         .auth()
         .signOut()
@@ -96,10 +94,6 @@ class Auth {
           }
         );
     });
-  };
-
-  clearCookie = () => {
-    Cookies.remove("session");
   };
 }
 

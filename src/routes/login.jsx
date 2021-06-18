@@ -4,7 +4,7 @@ import exprts from "../services/authenticate.js";
 
 const Login = ({ showLoading, onSignChange }) => {
   return (
-    <div>
+    <>
       <GoogleSignInButton
         onClick={async () => {
           showLoading(true);
@@ -19,7 +19,7 @@ const Login = ({ showLoading, onSignChange }) => {
         width="191"
         display={!exprts.IsSignedIn()}
       />
-    </div>
+    </>
   );
 };
 
