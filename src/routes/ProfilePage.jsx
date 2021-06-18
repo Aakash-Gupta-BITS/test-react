@@ -1,4 +1,4 @@
-import ProfileCard from "./profileCard";
+import ProfileCard from "../components/ProfileCard/ProfileCard";
 
 const ProfilePage = (props) => {
   const lis = props.Content;

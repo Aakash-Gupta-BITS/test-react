@@ -12,15 +12,13 @@ class GoogleSignInButton extends Component {
     const { onClick, width, display } = this.props;
 
     if (display)
-  return (<React.Fragment>
+      return (
+        <>
           <label
             type={display && "button"}
-            onMouseDown={() =>this.setState({ imgLogo: pressedLogo })
-            }
+            onMouseDown={() => this.setState({ imgLogo: pressedLogo })}
             onMouseUp={() => this.setState({ imgLogo: normalLogo })}
-            onMouseLeave={() =>
-              this.setState({ imgLogo: normalLogo })
-            }
+            onMouseLeave={() => this.setState({ imgLogo: normalLogo })}
             onClick={onClick}
           >
             <img
@@ -29,16 +27,14 @@ class GoogleSignInButton extends Component {
               width={width}
             />
           </label>
-      </React.Fragment>)
+        </>
+      );
     return (
-      <React.Fragment>
-          <label>
-            <img
-              src={disabledLogo}
-              alt="Sign in with Google"
-              width={width}/>
-          </label>
-      </React.Fragment>
+      <>
+        <label>
+          <img src={disabledLogo} alt="Sign in with Google" width={width} />
+        </label>
+      </>
     );
   }
 }

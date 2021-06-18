@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { IsSignedIn } from "../services/authenticate.js";
 import firebase from "firebase";
 
-import Login from "./login";
-import HomePage from "./homepage";
-import Loading from "../components/loading";
+import LoginPage from "./LoginPage";
+import HomePage from "./Homepage";
+import Loading from "../components/Loading";
 
-class Router extends Component {
+class App extends Component {
   state = {
     isLoaded: false,
     isSignedIn: false,
@@ -34,7 +34,7 @@ class Router extends Component {
     if (!this.state.isLoaded || !this.firstTimeLoad) return <Loading />;
     if (!this.state.isSignedIn)
       return (
-        <Login
+        <LoginPage
           showLoading={(status) => this.updateLoadStatus(!status)}
           onSignChange={() => this.updateSignStatus()}
         />
@@ -48,4 +48,4 @@ class Router extends Component {
   }
 }
 
-export default Router;
+export default App;

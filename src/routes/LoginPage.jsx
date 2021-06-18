@@ -1,8 +1,8 @@
 import React from "react";
-import GoogleSignInButton from "../components/login/googleSignInButton";
+import GoogleSignInButton from "../components/login/GoogleSignInButton";
 import { SignIn, IsSignedIn } from "../services/authenticate.js";
 
-const Login = ({ showLoading, onSignChange }) => {
+const LoginPage = ({ showLoading, onSignChange }) => {
   return (
     <>
       <GoogleSignInButton
@@ -23,4 +23,4 @@ const Login = ({ showLoading, onSignChange }) => {
   );
 };
 
-export default Login;
+export default LoginPage;
