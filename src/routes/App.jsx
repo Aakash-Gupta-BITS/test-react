@@ -4,7 +4,7 @@ import firebase from "firebase";
 
 import LoginPage from "./LoginPage";
 import HomePage from "./Homepage";
-import Loading from "../components/Loading";
+import Loading from "../components/loading";
 
 class App extends Component {
   state = {
@@ -31,18 +31,23 @@ class App extends Component {
   };
 
   render() {
+    const { infoToast, errorToast } = this.props;
+    
     if (!this.state.isLoaded || !this.firstTimeLoad) return <Loading />;
     if (!this.state.isSignedIn)
       return (
         <LoginPage
           showLoading={(status) => this.updateLoadStatus(!status)}
           onSignChange={() => this.updateSignStatus()}
+          infoToast={infoToast}
+          errorToast={errorToast}
         />
       );
     return (
       <HomePage
         showLoading={(status) => this.updateLoadStatus(!status)}
         onSignChange={() => this.updateSignStatus()}
+        errorToast={errorToast}
       />
     );
   }

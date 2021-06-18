@@ -98,24 +98,22 @@ class Auth {
 const auth = new Auth();
 firebase.analytics();
 
-export const SignIn = async (callback) => {
+export const SignIn = async (success, err) => {
   if (auth.checkClient()) return Promise.resolve(auth.user);
 
   try {
-    callback(0);
     await auth.signOut();
-    callback(20);
     await auth.clientLogIn();
-    callback(50);
     if (!auth.checkClient())
       throw new Error("Kindly use BITS email ID to log in");
 
+    success("Sign in almost done! Verifying from server...");
     await auth.serverLogIn();
-    callback(100);
+    success("Signed in");
     return Promise.resolve(auth.user);
   } catch (ex) {
     await auth.signOut();
-    callback(100);
+    err(ex.message);
     return Promise.reject(ex);
   }
 };
