@@ -1,10 +1,8 @@
-import React from "react";
+import { CircularProgress } from "@chakra-ui/react";
 
 const Loading = () => {
   return (
-    <div class="spinner-border text-primary" role="status">
-      <span class="sr-only"></span>
-    </div>
+    <CircularProgress isIndeterminate size="120px" thickness="5px" />
   );
 };
 

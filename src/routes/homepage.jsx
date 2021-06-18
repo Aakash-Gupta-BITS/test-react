@@ -1,6 +1,10 @@
 import React from "react";
 import { signOut } from "../services/authenticate.js";
 import { useToast } from "@chakra-ui/react";
+import {
+  Button
+} from "@chakra-ui/react";
+
 
 const HomePage = ({ showLoading, onSignChange }) => {
   const toast = useToast();
@@ -12,28 +16,28 @@ const HomePage = ({ showLoading, onSignChange }) => {
   };
 
   return (
-    <>
-      <label
-        type="button"
-        className="btn btn-primary"
-        onClick={async () => {
-          showLoading(true);
-          try {
-            await signOut();
-          } catch (ex) {
-            toast({
-              description: ex.message,
-              status: "error",
-              ...JSONprops,
-            });
-          }
-          showLoading(false);
-          onSignChange();
-        }}
-      >
-        Sign Out
-      </label>
-    </>
+      <Button
+          type="submit"
+          colorScheme="blue"
+          size="lg"
+          fontSize="md"
+          onClick={async () => {
+            showLoading(true);
+            try {
+              await signOut();
+            } catch (ex) {
+              toast({
+                description: ex.message,
+                status: "error",
+                ...JSONprops,
+              });
+            }
+            showLoading(false);
+            onSignChange();
+          }}
+        >
+          Sign out
+        </Button>
   );
 };
 

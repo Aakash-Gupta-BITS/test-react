@@ -5,10 +5,17 @@ import "./components/ProfileCard/profile.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./routes/App";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+const theme = extendTheme({
+  config: {
+    useSystemColorMode: true,
+    initialColorMode: "dark"
+  }
+});
 
 ReactDOM.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <App/>
   </ChakraProvider>,
   document.getElementById("root")

@@ -1,5 +1,5 @@
 import React from "react";
-import { signIn, isSignedIn } from "../services/authenticate.js";
+import { signIn } from "../services/authenticate.js";
 import {
   Box,
   Button,
@@ -12,7 +12,6 @@ import {
 import { Card } from "../components/Chakra-UI/Card";
 import { LoginForm } from "../components/Chakra-UI/LoginForm";
 import { DividerWithText } from "../components/Chakra-UI/DividerWithText";
-import { Link } from "../components/Chakra-UI/Link";
 
 import { FaGoogle } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
@@ -54,18 +53,14 @@ const LoginPage = ({ showLoading, onSignChange }) => {
                     toast({
                       description: msg,
                       status: "info",
-                      position: "top-right",
-                      duration: 4000,
-                      isClosable: true,
+                      ...JSONprops,
                     })
                   );
                 } catch (ex) {
                   toast({
                     description: ex.message,
                     status: "error",
-                    position: "top-right",
-                    duration: 4000,
-                    isClosable: true,
+                    ...JSONprops,
                   });
                 }
                 showLoading(false);
