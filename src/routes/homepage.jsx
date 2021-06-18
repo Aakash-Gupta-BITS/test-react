@@ -1,7 +1,16 @@
 import React from "react";
 import { signOut } from "../services/authenticate.js";
+import { useToast } from "@chakra-ui/react";
 
-const HomePage = ({ showLoading, onSignChange, errorToast }) => {
+const HomePage = ({ showLoading, onSignChange }) => {
+  const toast = useToast();
+  const JSONprops = {
+    variant: "left-accent",
+    position: "top-right",
+    duration: 4000,
+    isClosable: true,
+  };
+
   return (
     <>
       <label
@@ -12,7 +21,11 @@ const HomePage = ({ showLoading, onSignChange, errorToast }) => {
           try {
             await signOut();
           } catch (ex) {
-            errorToast(ex.message);
+            toast({
+              description: ex.message,
+              status: "error",
+              ...JSONprops,
+            });
           }
           showLoading(false);
           onSignChange();
