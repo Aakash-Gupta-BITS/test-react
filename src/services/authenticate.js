@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import { initializeApp } from "./firebase";
-import { serverUrl } from "../config/config";
+import { serverUrl, localCookieName } from "../config/config";
+import Cookie from "js-cookie";
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -98,34 +99,39 @@ class Auth {
 const auth = new Auth();
 firebase.analytics();
 
-export const SignIn = async (success, err) => {
-  if (auth.checkClient()) return Promise.resolve(auth.user);
+export const signIn = async (success) => {
+  if (isSignedIn()) return Promise.resolve(auth.user);
 
   try {
     await auth.signOut();
     await auth.clientLogIn();
+
     if (!auth.checkClient())
       throw new Error("Kindly use BITS email ID to log in");
 
     success("Sign in almost done! Verifying from server...");
+
     await auth.serverLogIn();
+
     success("Signed in");
+    Cookie.set(localCookieName, "true");
+
     return Promise.resolve(auth.user);
   } catch (ex) {
     await auth.signOut();
-    err(ex.message);
     return Promise.reject(ex);
   }
 };
 
-export const SignOut = async () => {
+export const signOut = async () => {
+  Cookie.remove(localCookieName);
   await auth.signOut();
 };
 
-export const IsSignedIn = () => {
-  return auth.checkClient();
+export const isSignedIn = () => {
+  return auth.checkClient() && Cookie.get(localCookieName) === "true";
 };
 
-export const IsAppLoaded = () => {
+export const isAppLoaded = () => {
   return auth.isLoaded;
 };

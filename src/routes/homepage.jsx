@@ -1,5 +1,5 @@
 import React from "react";
-import { SignOut } from "../services/authenticate.js";
+import { signOut } from "../services/authenticate.js";
 
 const HomePage = ({ showLoading, onSignChange, errorToast }) => {
   return (
@@ -10,9 +10,9 @@ const HomePage = ({ showLoading, onSignChange, errorToast }) => {
         onClick={async () => {
           showLoading(true);
           try {
-            await SignOut();
+            await signOut();
           } catch (ex) {
-            errorToast(`Error Occured while sign out: ${ex}`);
+            errorToast(ex.message);
           }
           showLoading(false);
           onSignChange();

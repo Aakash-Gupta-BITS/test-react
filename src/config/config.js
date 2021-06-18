@@ -9,3 +9,4 @@ export const firebaseConfig = {
 };
 
 export const serverUrl = "http://localhost:1337"; //"https://mysterious-reef-38114.herokuapp.com";
+export const localCookieName = "signed";

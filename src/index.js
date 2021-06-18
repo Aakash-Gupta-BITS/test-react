@@ -11,7 +11,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <>
-    <App infoToast={toast.info} errorToast={toast.error} />
+    <App
+      infoToast={(msg) => {
+        toast.dark(msg);
+        console.log(msg);
+      }}
+      errorToast={(msg) => {
+        toast.error(msg);
+        console.error(msg);
+      }}
+    />
     <ToastContainer
       position="top-right"
       autoClose={3000}

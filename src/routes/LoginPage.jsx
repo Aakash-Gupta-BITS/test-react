@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleSignInButton from "../components/login/GoogleSignInButton";
-import { SignIn, IsSignedIn } from "../services/authenticate.js";
+import { signIn, isSignedIn } from "../services/authenticate.js";
 
 const LoginPage = ({ showLoading, onSignChange, infoToast, errorToast }) => {
   return (
@@ -9,15 +9,15 @@ const LoginPage = ({ showLoading, onSignChange, infoToast, errorToast }) => {
         onClick={async () => {
           showLoading(true);
           try {
-            await SignIn(infoToast, errorToast);
+            await signIn(infoToast);
           } catch (ex) {
-            console.log(`Error Occured while sign in: ${ex}`);
+            errorToast(ex.message);
           }
           showLoading(false);
           onSignChange();
         }}
         width="191"
-        display={!IsSignedIn()}
+        display={!isSignedIn()}
       />
     </>
   );

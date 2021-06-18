@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IsSignedIn } from "../services/authenticate.js";
+import { isSignedIn } from "../services/authenticate.js";
 import firebase from "firebase";
 
 import LoginPage from "./LoginPage";
@@ -17,7 +17,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (!this.firstTimeLoad) {
         this.firstTimeLoad = true;
-        this.setState({ isLoaded: true, isSignedIn: IsSignedIn() });
+        this.setState({ isLoaded: true, isSignedIn: isSignedIn() });
       }
     });
   }
@@ -27,7 +27,7 @@ class App extends Component {
   };
 
   updateSignStatus = () => {
-    this.setState({ isSignedIn: IsSignedIn() });
+    this.setState({ isSignedIn: isSignedIn() });
   };
 
   render() {
