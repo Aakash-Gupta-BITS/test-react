@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./homepage";
 import exprts from "../services/authenticate.js";
 import Login from "./login";
@@ -7,33 +6,43 @@ import Loading from "../components/loading";
 import firebase from "firebase";
 
 class Router extends Component {
-  state = { isLoaded: false };
+  state = {
+    isLoaded: false,
+    isSignedIn: false,
+  };
+  firstTimeLoad = false;
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      this.setState({ isLoaded: true });
+      if (!this.firstTimeLoad) {
+        this.firstTimeLoad = true;
+        this.setState({ isLoaded: true, isSignedIn: exprts.IsSignedIn() });
+      }
     });
   }
 
-  render() {
-   // if (!this.state.isLoaded) return <Route component={Loading} />;
+  updateLoadStatus = (status) => {
+    this.setState({ isLoaded: status });
+  };
 
+  updateSignStatus = () => {
+    this.setState({ isSignedIn: exprts.IsSignedIn() });
+  };
+
+  render() {
+    if (!this.state.isLoaded || !this.firstTimeLoad) return <Loading />;
+    if (!this.state.isSignedIn)
+      return (
+        <Login
+          showLoading={(status) => this.updateLoadStatus(!status)}
+          onSignChange={() => this.updateSignStatus()}
+        />
+      );
     return (
-      <Switch>
-       
-        <Route path="/signIn" component={Login}></Route>
-        <Route
-          path="/loading"
-          render={() => {
-            if (!exprts.IsSignedIn()) return <Route component={Login} />;
-            return (
-              <div>
-                <h1>Hello</h1>
-              </div>
-            );
-          }}
-        ></Route>
-        <Route path="/homepage" component={HomePage} />
-      </Switch>
+      <HomePage
+        showLoading={(status) => this.updateLoadStatus(!status)}
+        onSignChange={() => this.updateSignStatus()}
+      />
     );
   }
 }

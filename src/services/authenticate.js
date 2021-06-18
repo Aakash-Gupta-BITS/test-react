@@ -33,13 +33,6 @@ class Auth {
     );
   };
 
-  checkCookies = () => {
-    console.log(Cookies.get("session"));
-    if (Cookies.get("session")) return true;
-    console.log("False will pervail");
-    return false;
-  };
-
   clientLogIn = async () => {
     if (this.user) return Promise.resolve(this.user);
 
@@ -62,7 +55,6 @@ class Auth {
 
   serverLogIn = async (csrfToken) => {
     const idToken = await this.user.getIdToken(true);
-    console.log(idToken);
     return new Promise((resolve, reject) => {
       fetch(serverUrl + "/api/auth/login", {
         method: "POST",
@@ -83,7 +75,6 @@ class Auth {
           } else return res.json();
         })
         .then((data) => {
-          Cookies.set("session", true);
           return resolve(data);
         })
         .catch((err) => reject(err));
@@ -115,37 +106,34 @@ class Auth {
 const auth = new Auth();
 firebase.analytics();
 
-const SignIn = async () => {
-  if (auth.checkClient() && auth.checkCookies())
-    return Promise.resolve(auth.user);
+const SignIn = async (callback) => {
+  if (auth.checkClient()) return Promise.resolve(auth.user);
 
   try {
+    callback(0);
     await auth.signOut();
+    callback(20);
     await auth.clientLogIn();
-
+    callback(50);
     if (!auth.checkClient())
       throw new Error("Kindly use BITS email ID to log in");
-    console.log("Firebase Signed IN Success");
-    const res = await auth.serverLogIn();
-    if (!auth.checkCookies())
-      throw new Error("Kindly allow cookies in the browser");
-    console.log(res);
+
+    await auth.serverLogIn();
+    callback(100);
     return Promise.resolve(auth.user);
   } catch (ex) {
     await auth.signOut();
-    console.log("Signed OUt due to Error");
-    console.log(ex);
+    callback(100);
     return Promise.reject(ex);
   }
 };
 
 const SignOut = async () => {
   await auth.signOut();
-  console.log("Signed OUt Successfully");
 };
 
 const IsSignedIn = () => {
-  return auth.checkCookies();
+  return auth.checkClient();
 };
 
 const IsAppLoaded = () => {
@@ -156,7 +144,7 @@ const exprts = {
   SignIn,
   SignOut,
   IsSignedIn,
-  IsAppLoaded
+  IsAppLoaded,
 };
 
 export default exprts;

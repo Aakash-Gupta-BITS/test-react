@@ -12,7 +12,7 @@ const firebaseConfig = {
 };
 
 const authStorageVar = "authUser";
-const serverUrl = "https://mysterious-reef-38114.herokuapp.com";
+const serverUrl = "http://localhost:1337"; //"https://mysterious-reef-38114.herokuapp.com";
 
 const initializeApp = () => {
   if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
