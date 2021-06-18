@@ -1,4 +1,4 @@
-import vars from "./config";
+import vars from "../config/config";
 vars.initializeApp();
 const firestore = vars.getFirestore();
 

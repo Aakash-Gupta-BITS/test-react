@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import HomePage from "./homepage";
-import exprts from "../services/authenticate.js";
-import Login from "./login";
-import Loading from "../components/loading";
+import { IsSignedIn } from "../services/authenticate.js";
 import firebase from "firebase";
+
+import Login from "./login";
+import HomePage from "./homepage";
+import Loading from "../components/loading";
 
 class Router extends Component {
   state = {
@@ -16,7 +17,7 @@ class Router extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (!this.firstTimeLoad) {
         this.firstTimeLoad = true;
-        this.setState({ isLoaded: true, isSignedIn: exprts.IsSignedIn() });
+        this.setState({ isLoaded: true, isSignedIn: IsSignedIn() });
       }
     });
   }
@@ -26,7 +27,7 @@ class Router extends Component {
   };
 
   updateSignStatus = () => {
-    this.setState({ isSignedIn: exprts.IsSignedIn() });
+    this.setState({ isSignedIn: IsSignedIn() });
   };
 
   render() {

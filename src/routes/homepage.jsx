@@ -1,5 +1,6 @@
 import React from "react";
-import exprts from "../services/authenticate.js";
+import {SignOut} from "../services/authenticate.js";
+
 const HomePage = ({ showLoading, onSignChange }) => {
   return (
     <label
@@ -8,7 +9,7 @@ const HomePage = ({ showLoading, onSignChange }) => {
       onClick={async () => {
 		showLoading(true);
 		try{
-			await exprts.SignOut();
+			await SignOut();
 		}
 		catch(ex){
             console.log(`Error Occured while sign out: ${ex}`);

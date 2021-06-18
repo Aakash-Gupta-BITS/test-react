@@ -1,14 +1,12 @@
 import firebase from "firebase";
-import firebaseCommon from "./config";
+import { initializeApp } from "./firebase";
+import { serverUrl } from "../config/config";
 
-require("firebase/auth");
-
-const serverUrl = firebaseCommon.serverUrl;
 const provider = new firebase.auth.GoogleAuthProvider();
 
 class Auth {
   constructor() {
-    firebaseCommon.initializeApp();
+    initializeApp();
     firebase.auth().onAuthStateChanged((user) => {
       this.user = user;
       this.isLoaded = true;
@@ -100,7 +98,7 @@ class Auth {
 const auth = new Auth();
 firebase.analytics();
 
-const SignIn = async (callback) => {
+export const SignIn = async (callback) => {
   if (auth.checkClient()) return Promise.resolve(auth.user);
 
   try {
@@ -122,23 +120,14 @@ const SignIn = async (callback) => {
   }
 };
 
-const SignOut = async () => {
+export const SignOut = async () => {
   await auth.signOut();
 };
 
-const IsSignedIn = () => {
+export const IsSignedIn = () => {
   return auth.checkClient();
 };
 
-const IsAppLoaded = () => {
+export const IsAppLoaded = () => {
   return auth.isLoaded;
 };
-
-const exprts = {
-  SignIn,
-  SignOut,
-  IsSignedIn,
-  IsAppLoaded,
-};
-
-export default exprts;

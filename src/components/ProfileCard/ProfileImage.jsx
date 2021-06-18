@@ -1,5 +1,5 @@
 import { Component } from "react";
-import vars from "../../services/config";
+import vars from "../../config/config";
 import basicImage from "../resources/basic.jpg";
 const storage = vars.getStorage();
 
