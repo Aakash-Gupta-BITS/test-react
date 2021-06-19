@@ -8,5 +8,6 @@ export const firebaseConfig = {
   measurementId: "G-9K9XP8WS3L"
 };
 
-export const serverUrl = "https://mysterious-reef-38114.herokuapp.com"; //"https://mysterious-reef-38114.herokuapp.com";
+export const serverUrl = "http://localhost:1337";
 export const localCookieName = "signed";
+export const teamJSONCookie = "teamList";

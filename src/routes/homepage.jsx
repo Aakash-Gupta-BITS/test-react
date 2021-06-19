@@ -6,7 +6,6 @@ import {
 } from "@chakra-ui/react";
 import ProfilePage from "./ProfilePage";
 
-
 const HomePage = ({ showLoading, onSignChange, Data }) => {
   const toast = useToast();
   const JSONprops = {
@@ -15,7 +14,6 @@ const HomePage = ({ showLoading, onSignChange, Data }) => {
     duration: 4000,
     isClosable: true,
   };
-  console.log(Data);
   return (
       <div>
       <Button
@@ -40,7 +38,7 @@ const HomePage = ({ showLoading, onSignChange, Data }) => {
         >
           Sign out
         </Button>
-        {/* <ProfilePage Content={Data}/> */}
+        <ProfilePage Content={Data}/>
       </div>
   );
 };

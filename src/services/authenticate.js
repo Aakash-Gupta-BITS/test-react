@@ -1,7 +1,8 @@
 import firebase from "firebase";
 import { initializeApp } from "./firebase";
-import { serverUrl, localCookieName } from "../config/config";
-import Cookie from "js-cookie";
+import { serverUrl, localCookieName, teamJSONCookie } from "../config/config";
+
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -114,7 +115,7 @@ export const signIn = async (success) => {
     await auth.serverLogIn();
 
     success("Signed in");
-    Cookie.set(localCookieName, "true");
+    reactLocalStorage.set(localCookieName, "signedIn");
 
     return Promise.resolve(auth.user);
   } catch (ex) {
@@ -124,12 +125,13 @@ export const signIn = async (success) => {
 };
 
 export const signOut = async () => {
-  Cookie.remove(localCookieName);
+  reactLocalStorage.remove(localCookieName);
+  reactLocalStorage.remove(teamJSONCookie);
   await auth.signOut();
 };
 
 export const isSignedIn = () => {
-  return auth.checkClient() && Cookie.get(localCookieName) === "true";
+  return auth.checkClient() && reactLocalStorage.get(localCookieName) === "signedIn";
 };
 
 export const isAppLoaded = () => {

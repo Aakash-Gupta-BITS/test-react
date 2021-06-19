@@ -9,12 +9,14 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { Card } from "../components/Chakra-UI/Card";
-import { LoginForm } from "../components/Chakra-UI/LoginForm";
-import { DividerWithText } from "../components/Chakra-UI/DividerWithText";
+import { Card } from "../components/LoginPage/Card";
+import { LoginForm } from "../components/LoginPage/LoginForm";
+import { DividerWithText } from "../components/LoginPage/DividerWithText";
 
 import { FaGoogle } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { teamJSONCookie } from "../config/config.js";
 
 const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
   const toast = useToast();
@@ -27,11 +29,25 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
 
   const loadDataFromServer = async () => {
     return new Promise((resolve, reject) => {
-      fetch("https://mysterious-reef-38114.herokuapp.com/api/members/all")
-        .then((response) => response.json())
-        .then((res) => {
-          resolve(res);
-        });
+      fetch("http://localhost:1337/api/team/all", {
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            const text = await res.text();
+            throw new Error(text);
+          } else return res.json();
+        })
+        .then((data) => {
+          reactLocalStorage.setObject(teamJSONCookie, data);
+          return resolve(data);
+        })
+        .catch((ex) => reject(ex));
     });
   };
 
