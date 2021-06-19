@@ -40,6 +40,7 @@ export const PasswordField = React.forwardRef((props, ref) => {
         <FormLabel>Password</FormLabel>
         <Box
           as="a"
+          cursor="pointer"
           color={mode("blue.600", "blue.200")}
           fontWeight="semibold"
           fontSize="sm"

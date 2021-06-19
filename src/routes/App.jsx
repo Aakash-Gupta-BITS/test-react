@@ -3,7 +3,7 @@ import { isSignedIn } from "../services/authenticate.js";
 import firebase from "firebase";
 
 import LoginPage from "./LoginPage";
-import HomePage from "./Homepage";
+import HomePage from "./HomePage";
 import Loading from "../components/loading";
 
 class App extends Component {
@@ -12,6 +12,7 @@ class App extends Component {
     isSignedIn: false,
   };
   firstTimeLoad = false;
+  team = null;
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -29,7 +30,9 @@ class App extends Component {
   updateSignStatus = () => {
     this.setState({ isSignedIn: isSignedIn() });
   };
-
+  onDataLoad = (obj) => {
+    this.team = obj;
+  };
   render() {
     if (!this.state.isLoaded || !this.firstTimeLoad) return <Loading />;
     if (!this.state.isSignedIn)
@@ -37,12 +40,14 @@ class App extends Component {
         <LoginPage
           showLoading={(status) => this.updateLoadStatus(!status)}
           onSignChange={() => this.updateSignStatus()}
+          onDataLoad={this.onDataLoad}
         />
       );
     return (
       <HomePage
         showLoading={(status) => this.updateLoadStatus(!status)}
         onSignChange={() => this.updateSignStatus()}
+        Data={this.team}
       />
     );
   }

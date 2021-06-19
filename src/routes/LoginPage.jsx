@@ -16,13 +16,23 @@ import { DividerWithText } from "../components/Chakra-UI/DividerWithText";
 import { FaGoogle } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
 
-const LoginPage = ({ showLoading, onSignChange }) => {
+const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
   const toast = useToast();
   const JSONprops = {
     variant: "left-accent",
     position: "top-right",
     duration: 4000,
     isClosable: true,
+  };
+
+  const loadDataFromServer = async () => {
+    return new Promise((resolve, reject) => {
+      fetch("https://mysterious-reef-38114.herokuapp.com/api/members/all")
+        .then((response) => response.json())
+        .then((res) => {
+          resolve(res);
+        });
+    });
   };
 
   return (
@@ -56,6 +66,8 @@ const LoginPage = ({ showLoading, onSignChange }) => {
                       ...JSONprops,
                     })
                   );
+                  const result = await loadDataFromServer();
+                  onDataLoad(result);
                 } catch (ex) {
                   toast({
                     description: ex.message,

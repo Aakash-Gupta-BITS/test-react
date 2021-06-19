@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 
 
-const HomePage = ({ showLoading, onSignChange }) => {
+const HomePage = ({ showLoading, onSignChange, Data }) => {
   const toast = useToast();
   const JSONprops = {
     variant: "left-accent",
@@ -14,7 +14,7 @@ const HomePage = ({ showLoading, onSignChange }) => {
     duration: 4000,
     isClosable: true,
   };
-
+  console.log(Data)
   return (
       <Button
           type="submit"

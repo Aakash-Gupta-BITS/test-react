@@ -23,12 +23,7 @@ class Global extends Component {
       }
       if (usr !== null) {
         try {
-            fetch("https://mysterious-reef-38114.herokuapp.com/api/members/all").then(
-                response => response.json()
-            ).then ((res) => {
-                console.log(res);
-                this.setState({isLoggedIn: true, isWaiting: false, userData: res});
-            });
+           
         } catch (ex) {}
       }
 
