@@ -1,18 +1,22 @@
 import { Component } from "react";
-import vars from "../../config/config";
-import basicImage from "../resources/basic.jpg";
-const storage = vars.getStorage();
+import { getStorage } from "../../services/firebase";
+
+const storage = getStorage();
 
 class ProfileImage extends Component {
-  state = { imglink: basicImage };
+  state = { imglink: null };
 
   async componentDidMount() {
-    var imglink = await storage.ref().child(this.props.Link).getDownloadURL();
+    try{
+      var imglink = await storage.ref().child(this.props.Link).getDownloadURL();
+    } catch(ex) {
+      imglink = await storage.ref().child("Profile Images/basic.jpg").getDownloadURL();
+    } 
     this.setState({ imglink });
   }
 
   render() {
-    return <img src={this.state.imglink} className="profile-image"></img>;
+    return <img src={this.state.imglink} alt="No Profile" className="profile-image"></img>;
   }
 }
 export default ProfileImage;

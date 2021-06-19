@@ -25,21 +25,21 @@ const ProfileText = ({
         <p>{position}</p>
         <p>{year + "  Batch"} </p>
         <p>
-          <a href={hackerearth} target="_blank">
+          <a href={hackerearth} target="_blank" rel="noreferrer">
             <SiHackerearth style={{ marginRight: 30 }} />
           </a>
-          <a href={gmail} target="_blank">
+          <a href={gmail} target="_blank" rel="noreferrer">
             <SiGmail style={{ marginRight: 30 }} />
           </a>
-          <a href={hackerrank} target="_blank">
+          <a href={hackerrank} target="_blank" rel="noreferrer">
             <SiHackerrank />
           </a>
         </p>
         <p>
-          <a href={codechef} target="_blank">
+          <a href={codechef} target="_blank" rel="noreferrer">
             <SiCodechef style={{ marginRight: 30 }} />
           </a>
-          <a href={codeforces} target="_blank">
+          <a href={codeforces} target="_blank" rel="noreferrer">
             <SiCodeforces />
           </a>
         </p>

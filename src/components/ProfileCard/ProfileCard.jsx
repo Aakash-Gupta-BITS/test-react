@@ -22,7 +22,7 @@ const ProfileCard = (props) => {
     atcoder,
     hackerearth,
     hackerrank,
-    profileref,
+    profileRef,
   } = props.Content;
 
   return (
@@ -31,7 +31,7 @@ const ProfileCard = (props) => {
       onMouseOver={bringUp}
       onMouseLeave={bringDown}
     >
-      <ProfileImage Link={profileref} />
+      <ProfileImage Link={profileRef} />
       <ProfileText
         name={name}
         position="Member"
