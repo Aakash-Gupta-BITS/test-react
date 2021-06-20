@@ -1,8 +1,8 @@
 import firebase from "firebase";
 import { initializeApp } from "./firebase";
-import { serverUrl, localCookieName, teamJSONCookie } from "../config/config";
-
-import {reactLocalStorage} from 'reactjs-localstorage';
+import { storageAuth, storageTeam } from "../config/storageVars";
+import { post } from "./managers/Endpoint";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -54,30 +54,13 @@ class Auth {
 
   serverLogIn = async (csrfToken) => {
     const idToken = await this.user.getIdToken(true);
-    return new Promise((resolve, reject) => {
-      fetch(serverUrl + "/api/auth/login", {
-        method: "POST",
-        mode: "cors",
-        credentials: "include",
-        body: JSON.stringify({
-          idToken: idToken,
-          csrfToken: csrfToken,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    return post(
+      "/api/auth/login",
+      JSON.stringify({
+        idToken: idToken,
+        csrfToken: csrfToken,
       })
-        .then(async (res) => {
-          if (!res.ok) {
-            const text = await res.text();
-            throw new Error(text);
-          } else return res.json();
-        })
-        .then((data) => {
-          return resolve(data);
-        })
-        .catch((err) => reject(err));
-    });
+    );
   };
 
   signOut = async () => {
@@ -115,7 +98,7 @@ export const signIn = async (success) => {
     await auth.serverLogIn();
 
     success("Signed in");
-    reactLocalStorage.set(localCookieName, "signedIn");
+    reactLocalStorage.set(storageAuth, "signedIn");
 
     return Promise.resolve(auth.user);
   } catch (ex) {
@@ -125,13 +108,15 @@ export const signIn = async (success) => {
 };
 
 export const signOut = async () => {
-  reactLocalStorage.remove(localCookieName);
-  reactLocalStorage.remove(teamJSONCookie);
+  reactLocalStorage.remove(storageAuth);
+  reactLocalStorage.remove(storageTeam);
   await auth.signOut();
 };
 
 export const isSignedIn = () => {
-  return auth.checkClient() && reactLocalStorage.get(localCookieName) === "signedIn";
+  return (
+    auth.checkClient() && reactLocalStorage.get(storageAuth) === "signedIn"
+  );
 };
 
 export const isAppLoaded = () => {

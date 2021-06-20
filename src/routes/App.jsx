@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { teamJSONCookie } from "../config/config.js";
-import { isSignedIn } from "../services/authenticate.js";
+import { storageTeam } from "../config/storageVars";
+import { isSignedIn, signOut } from "../services/authenticate.js";
 import firebase from "firebase";
 
 import LoginPage from "./LoginPage";
@@ -20,10 +20,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (!this.firstTimeLoad) {
         this.firstTimeLoad = true;
-        this.team = reactLocalStorage.getObject(
-          teamJSONCookie,
-          null
-        );
+        this.team = reactLocalStorage.getObject(storageTeam, null);
         this.setState({ isLoaded: true, isSignedIn: isSignedIn() });
       }
     });
@@ -34,25 +31,33 @@ class App extends Component {
   };
 
   updateSignStatus = () => {
-    this.setState({ isSignedIn: isSignedIn() });
+    this.setState({ isSignedIn: isSignedIn(), isLoaded: true });
   };
   onDataLoad = (obj) => {
     this.team = obj;
   };
   render() {
+    if (window.location.pathname == "/reset") {
+      signOut();
+      return (
+        <p>
+          You can now goto website <a href={window.location.origin}>{window.location.origin}</a>
+        </p>
+      );
+    }
     if (!this.state.isLoaded || !this.firstTimeLoad) return <Loading />;
     if (!this.state.isSignedIn)
       return (
         <LoginPage
           showLoading={(status) => this.updateLoadStatus(!status)}
-          onSignChange={() => this.updateSignStatus()}
+          onSignChange={this.updateSignStatus}
           onDataLoad={this.onDataLoad}
         />
       );
     return (
       <HomePage
         showLoading={(status) => this.updateLoadStatus(!status)}
-        onSignChange={() => this.updateSignStatus()}
+        onSignChange={this.updateSignStatus}
         Data={this.team}
       />
     );

@@ -9,5 +9,3 @@ export const firebaseConfig = {
 };
 
 export const serverUrl = "http://localhost:1337";
-export const localCookieName = "signed";
-export const teamJSONCookie = "teamList";

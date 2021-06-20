@@ -12,11 +12,12 @@ import {
 import { Card } from "../components/LoginPage/Card";
 import { LoginForm } from "../components/LoginPage/LoginForm";
 import { DividerWithText } from "../components/LoginPage/DividerWithText";
+import { get } from "../services/managers/Endpoint";
 
 import { FaGoogle } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { teamJSONCookie } from "../config/config.js";
+import { storageTeam } from "../config/storageVars";
 
 const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
   const toast = useToast();
@@ -28,27 +29,7 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
   };
 
   const loadDataFromServer = async () => {
-    return new Promise((resolve, reject) => {
-      fetch("http://localhost:1337/api/team/all", {
-        method: "GET",
-        mode: "cors",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(async (res) => {
-          if (!res.ok) {
-            const text = await res.text();
-            throw new Error(text);
-          } else return res.json();
-        })
-        .then((data) => {
-          reactLocalStorage.setObject(teamJSONCookie, data);
-          return resolve(data);
-        })
-        .catch((ex) => reject(ex));
-    });
+    return get("/api/team/all");
   };
 
   return (
@@ -82,7 +63,13 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
                       ...JSONprops,
                     })
                   );
+                  toast({
+                    description: "Getting site data from server",
+                    status: "info",
+                    ...JSONprops,
+                  });
                   const result = await loadDataFromServer();
+                  reactLocalStorage.setObject(storageTeam, result);
                   onDataLoad(result);
                 } catch (ex) {
                   toast({
@@ -91,7 +78,6 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
                     ...JSONprops,
                   });
                 }
-                showLoading(false);
                 onSignChange();
               }}
             >
