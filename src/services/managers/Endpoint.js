@@ -1,8 +1,6 @@
-import { serverUrl } from "../../config/config";
-
 const sendRequest = (method, path, body, onDataReceive) => {
   return new Promise((resolve, reject) => {
-    fetch(`${serverUrl}${path}`, {
+    fetch(path, {
       method: method,
       mode: "cors",
       credentials: "include",

@@ -3,7 +3,7 @@ import { initializeApp } from "./firebase";
 import { storageAuth, storageTeam } from "../config/storageVars";
 import { post } from "./managers/Endpoint";
 import { reactLocalStorage } from "reactjs-localstorage";
-
+import { signInURL } from "../config/endPoints";
 const provider = new firebase.auth.GoogleAuthProvider();
 
 class Auth {
@@ -55,7 +55,7 @@ class Auth {
   serverLogIn = async (csrfToken) => {
     const idToken = await this.user.getIdToken(true);
     return post(
-      "/api/auth/login",
+      signInURL,
       JSON.stringify({
         idToken: idToken,
         csrfToken: csrfToken,

@@ -37,7 +37,7 @@ class App extends Component {
     this.team = obj;
   };
   render() {
-    if (window.location.pathname == "/reset") {
+    if (window.location.pathname === "/reset") {
       signOut();
       return (
         <p>

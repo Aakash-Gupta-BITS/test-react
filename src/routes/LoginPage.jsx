@@ -18,6 +18,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { storageTeam } from "../config/storageVars";
+import {teamListURL} from "../config/endPoints";
 
 const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
   const toast = useToast();
@@ -29,7 +30,7 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
   };
 
   const loadDataFromServer = async () => {
-    return get("/api/team/all");
+    return get(teamListURL);
   };
 
   return (
@@ -69,6 +70,9 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad }) => {
                     ...JSONprops,
                   });
                   const result = await loadDataFromServer();
+                  
+                  if (!result)
+                    throw new Error("Data fetched from server is empty! Contact Developer");
                   reactLocalStorage.setObject(storageTeam, result);
                   onDataLoad(result);
                 } catch (ex) {
