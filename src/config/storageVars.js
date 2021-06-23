@@ -1,2 +1,2 @@
-export const storageAuth = "signed";
+export const storageAuthUsername = "username";
 export const storageTeam = "teamList";

@@ -12,7 +12,7 @@ import { reactLocalStorage } from "reactjs-localstorage";
 const RenderPages = ({
   team,
   isLoaded,
-  firstTimeLoad,
+  isAlreadyLoaded,
   isSignedIn,
   updateLoadStatus,
   updateSignStatus,
@@ -21,7 +21,7 @@ const RenderPages = ({
   const toast = useToast();
   const JSONprops = {
     variant: "left-accent",
-    position: "top-right",
+    position: "bottom-right",
     duration: 4000,
     isClosable: true,
   };
@@ -35,7 +35,7 @@ const RenderPages = ({
       </p>
     );
   }
-  if (!isLoaded || !firstTimeLoad) return <Loading />;
+  if (!isLoaded || !isAlreadyLoaded) return <Loading />;
   if (!isSignedIn)
     return (
       <LoginPage
@@ -55,7 +55,7 @@ const RenderPages = ({
     <HomePage
       showLoading={(status) => updateLoadStatus(!status)}
       onSignChange={updateSignStatus}
-      Data={team}
+      teamJSON={team}
       showToast={(description, status) =>
         toast({
           description: description,
@@ -72,13 +72,15 @@ class App extends Component {
     isLoaded: false,
     isSignedIn: false,
   };
-  firstTimeLoad = false;
+  isAlreadyLoaded = false;
   team = null;
+  userName = null;
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if (!this.firstTimeLoad) {
-        this.firstTimeLoad = true;
+      console.log(user);
+      if (!this.isAlreadyLoaded) {
+        this.isAlreadyLoaded = true;
         this.team = reactLocalStorage.getObject(storageTeam, null);
         this.setState({ isLoaded: true, isSignedIn: isSignedIn() });
       }
@@ -101,7 +103,7 @@ class App extends Component {
       <RenderPages
         team={this.team}
         isLoaded={this.state.isLoaded}
-        firstTimeLoad={this.firstTimeLoad}
+        isAlreadyLoaded={this.isAlreadyLoaded}
         isSignedIn={this.state.isSignedIn}
         updateLoadStatus={this.updateLoadStatus}
         updateSignStatus={this.updateSignStatus}

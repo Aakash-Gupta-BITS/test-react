@@ -26,7 +26,8 @@ const ProfilePage = (props) => {
         return (
           <div className="profile-page">
             {ls.map((obj, index) => {
-              return <ProfileCard Content={g[i][index]} key={index} />;
+              return <ProfileCard
+              key={index} Content={g[i][index]} key={index} />;
             })}
           </div>
         );

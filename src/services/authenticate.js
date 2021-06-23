@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import { initializeApp } from "./firebase";
-import { storageAuth, storageTeam } from "../config/storageVars";
+import { storageAuthUsername, storageTeam } from "../config/storageVars";
 import { post } from "./managers/Endpoint";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { signInURL } from "../config/endPoints";
@@ -52,6 +52,11 @@ class Auth {
     });
   };
 
+  clientInfo = () => (this.user && {
+    name: this.user.displayName,
+    email: this.user.email
+  });
+
   serverLogIn = async (csrfToken) => {
     const idToken = await this.user.getIdToken(true);
     return post(
@@ -98,7 +103,7 @@ export const signIn = async (success) => {
     await auth.serverLogIn();
 
     success("Signed in");
-    reactLocalStorage.set(storageAuth, "signedIn");
+    reactLocalStorage.set(storageAuthUsername, auth.clientInfo().name);
 
     return Promise.resolve(auth.user);
   } catch (ex) {
@@ -108,14 +113,14 @@ export const signIn = async (success) => {
 };
 
 export const signOut = async () => {
-  reactLocalStorage.remove(storageAuth);
+  reactLocalStorage.remove(storageAuthUsername);
   reactLocalStorage.remove(storageTeam);
   await auth.signOut();
 };
 
 export const isSignedIn = () => {
   return (
-    auth.checkClient() && reactLocalStorage.get(storageAuth) === "signedIn"
+    auth.checkClient() && reactLocalStorage.get(storageAuthUsername) === auth.clientInfo().name
   );
 };
 

@@ -1,32 +1,53 @@
-import React from "react";
+import React, {Component} from "react";
 import { signOut } from "../services/authenticate.js";
-import { Button } from "@chakra-ui/react";
+import { storageAuthUsername } from "../config/storageVars";
 import ProfilePage from "./ProfilePage";
+import { reactLocalStorage } from "reactjs-localstorage";
+import TopNavigationBar from "../components/TopNavBar.jsx";
 
-const HomePage = ({ showLoading, onSignChange, Data, showToast }) => {
-  return (
-    <div>
-      <Button
-        type="submit"
-        colorScheme="blue"
-        size="lg"
-        fontSize="md"
-        onClick={async () => {
-          showLoading(true);
-          try {
-            await signOut();
-          } catch (ex) {
-            showToast(ex.message, "error");
-          }
-          showLoading(false);
-          onSignChange();
-        }}
-      >
-        Sign out
-      </Button>
-      <ProfilePage Content={Data} />
-    </div>
-  );
-};
+class HomePage extends Component {
+  state = {
+    comp: "",
+  };
 
+  render() {
+    const { showLoading, onSignChange, teamJSON, showToast } = this.props;
+    const userName = reactLocalStorage.get(storageAuthUsername, null);
+
+    return (
+      <>
+        <TopNavigationBar
+          title={`Welcome ${userName}!!`}
+          names={["Team", "Blogs", "Q/A", "Sign Out"]}
+          onClick={async (name) => {
+            switch (name) {
+              case "Team":
+                this.setState({ comp: <ProfilePage Content={teamJSON} />});
+                break;
+
+              case "Blogs":
+                this.setState({ comp: "Not Implemented"});
+                break;
+
+              case "Q/A":
+                this.setState({ comp: "Not Implemented"});
+                break;
+
+              case "Sign Out":
+                showLoading(true);
+                try {
+                  await signOut();
+                } catch (ex) {
+                  showToast(ex.message, "error");
+                }
+                showLoading(false);
+                onSignChange();
+            }
+          }}
+        />
+        <div>{this.state.comp}</div>
+      </>
+    );
+  }
+}
 export default HomePage;
