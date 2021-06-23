@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { signOut } from "../services/authenticate.js";
 import { storageAuthUsername } from "../config/storageVars";
 import ProfilePage from "./ProfilePage";
@@ -18,34 +18,40 @@ class HomePage extends Component {
       <>
         <TopNavigationBar
           title={`Welcome ${userName}!!`}
-          names={["Team", "Blogs", "Q/A", "Developers", "Sign Out" ]}
+          names={["Team", "Blogs", "Q/A", "Developers", "Sign Out"]}
           onClick={async (name) => {
             switch (name) {
               case "Team":
-                this.setState({ comp: <ProfilePage Content={teamJSON} />});
+                this.setState({ comp: <ProfilePage Content={teamJSON} /> });
                 break;
 
               case "Blogs":
-                this.setState({ comp: "Blogs will appear here"});
+                this.setState({ comp: "Blogs will appear here" });
                 break;
 
               case "Q/A":
-                this.setState({ comp: "Q/A will appear here"});
+                this.setState({ comp: "Q/A will appear here" });
                 break;
 
               case "Developers":
-                this.setState({comp: "Developer list will appear here"});
+                this.setState({ comp: "Developer list will appear here" });
                 break;
 
               case "Sign Out":
                 showLoading(true);
                 try {
                   await signOut();
+                  showToast("Successfully signed out.", "success");
                 } catch (ex) {
                   showToast(ex.message, "error");
                 }
                 showLoading(false);
                 onSignChange();
+                break;
+                
+              default:
+                this.setState({ comp: "This should never be called" });
+                break;
             }
           }}
         />

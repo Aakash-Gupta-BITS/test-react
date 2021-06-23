@@ -24,10 +24,11 @@ const ProfilePage = (props) => {
       </div>
       {g.map((ls, i) => {
         return (
-          <div className="profile-page">
+          <div key={i} className="profile-page">
             {ls.map((obj, index) => {
-              return <ProfileCard
-              key={index} Content={g[i][index]} key={index} />;
+              return (
+                <ProfileCard key={index} Content={g[i][index]} />
+              );
             })}
           </div>
         );

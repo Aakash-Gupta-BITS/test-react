@@ -4,15 +4,8 @@ import {
   Spacer,
   Button,
   Heading,
-  Center,
-  Box,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
+  Center
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
 const TopNavigationBar = ({ title, names, onClick }) => {
   return (
@@ -23,6 +16,8 @@ const TopNavigationBar = ({ title, names, onClick }) => {
         bg="gray.900"
         boxShadow="base"
         flexDir={["column", "column", "row", "row"]}
+        zIndex={1}
+        sx={{ position: '-webkit-sticky', top: '0'}}
       >
         <Center pl={4} h={[12,12,16,16]}>
           <Heading size="lg">{title}</Heading>

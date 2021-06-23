@@ -18,7 +18,7 @@ const LoginPage = ({ showLoading, onSignChange, onDataLoad, showToast }) => {
       onSignClick={async () => {
         showLoading(true);
         try {
-          await signIn((msg) => showToast(msg, "info"));
+          await signIn((msg) => showToast(msg, "info"), msg => showToast(msg, "success"));
           showToast("Getting site data from server", "info");
           const result = await loadDataFromServer();
 

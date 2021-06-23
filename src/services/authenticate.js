@@ -88,7 +88,7 @@ class Auth {
 const auth = new Auth();
 firebase.analytics();
 
-export const signIn = async (success) => {
+export const signIn = async (info, success) => {
   if (isSignedIn()) return Promise.resolve(auth.user);
 
   try {
@@ -96,13 +96,13 @@ export const signIn = async (success) => {
     await auth.clientLogIn();
 
     if (!auth.checkClient())
-      throw new Error("Kindly use BITS email ID to log in");
+      throw new Error("Kindly use BITS email ID to log in.");
 
-    success("Sign in almost done! Verifying from server...");
+    info("Sign in almost done! Verifying from server...");
 
     await auth.serverLogIn();
 
-    success("Signed in");
+    success("Signed in.");
     reactLocalStorage.set(storageAuthUsername, auth.clientInfo().name);
 
     return Promise.resolve(auth.user);

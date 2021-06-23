@@ -74,11 +74,9 @@ class App extends Component {
   };
   isAlreadyLoaded = false;
   team = null;
-  userName = null;
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       if (!this.isAlreadyLoaded) {
         this.isAlreadyLoaded = true;
         this.team = reactLocalStorage.getObject(storageTeam, null);
