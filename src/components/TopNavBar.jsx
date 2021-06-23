@@ -16,8 +16,9 @@ const TopNavigationBar = ({ title, names, onClick }) => {
         bg="gray.900"
         boxShadow="base"
         flexDir={["column", "column", "row", "row"]}
-        zIndex={1}
-        sx={{ position: '-webkit-sticky', top: '0'}}
+        zIndex={500}
+        sx={{ position: 'sticky', top: '0'}}
+        opacity={0.95}
       >
         <Center pl={4} h={[12,12,16,16]}>
           <Heading size="lg">{title}</Heading>
