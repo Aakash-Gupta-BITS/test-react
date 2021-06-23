@@ -18,7 +18,7 @@ class HomePage extends Component {
       <>
         <TopNavigationBar
           title={`Welcome ${userName}!!`}
-          names={["Team", "Blogs", "Q/A", "Sign Out"]}
+          names={["Team", "Blogs", "Q/A", "Developers", "Sign Out" ]}
           onClick={async (name) => {
             switch (name) {
               case "Team":
@@ -26,11 +26,15 @@ class HomePage extends Component {
                 break;
 
               case "Blogs":
-                this.setState({ comp: "Not Implemented"});
+                this.setState({ comp: "Blogs will appear here"});
                 break;
 
               case "Q/A":
-                this.setState({ comp: "Not Implemented"});
+                this.setState({ comp: "Q/A will appear here"});
+                break;
+
+              case "Developers":
+                this.setState({comp: "Developer list will appear here"});
                 break;
 
               case "Sign Out":
