@@ -13,6 +13,8 @@
     "bootstrap": "^5.0.1",
     "firebase": "^8.2.9",
     "framer-motion": "^4.1.17",
+    "highlight.js": "^11.0.1",
+    "prismjs": "^1.23.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -22,7 +24,7 @@
     "web-vitals": "^2.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=5000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

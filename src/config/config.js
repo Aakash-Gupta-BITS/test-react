@@ -8,4 +8,4 @@ export const firebaseConfig = {
   measurementId: "G-9K9XP8WS3L"
 };
 
-export const serverUrl = "http://localhost:1337";
+export const serverUrl = "";
