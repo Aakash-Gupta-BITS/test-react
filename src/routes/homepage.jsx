@@ -18,9 +18,13 @@ class HomePage extends Component {
       <>
         <TopNavigationBar
           title={`Welcome ${userName}!!`}
-          names={["Team", "Blogs", "Q/A", "Developers", "Sign Out"]}
+          names={["Home","Team", "Blogs", "Q/A", "Developers", "Sign Out"]}
           onClick={async (name) => {
             switch (name) {
+              case "Home":
+                this.setState({comp:""});
+                break;
+
               case "Team":
                 this.setState({ comp: <ProfilePage Content={teamJSON} /> });
                 break;

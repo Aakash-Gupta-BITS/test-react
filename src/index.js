@@ -1,12 +1,14 @@
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./components/ProfileCard/profile.css";
-
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./routes/App";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools"
+import CodePage from "./routes/CodePage";
+// const hljs = require("highlight.js/lib/common");
+
 
 const breakpoints = createBreakpoints({
   sm: "30em",
@@ -24,8 +26,12 @@ const theme = extendTheme({
 });
 
 ReactDOM.render(
+  
+  <div>
   <ChakraProvider theme={theme}>
     <App/>
-  </ChakraProvider>,
+  </ChakraProvider>
+  <CodePage/>
+  </div>,
   document.getElementById("root")
 );

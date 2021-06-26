@@ -14,9 +14,11 @@
     "firebase": "^8.2.9",
     "framer-motion": "^4.1.17",
     "highlight.js": "^11.0.1",
+    "html-react-parser": "^1.2.7",
     "prismjs": "^1.23.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-html-parser": "^2.0.2",
     "react-icons": "^4.2.0",
     "react-json-view": "^1.21.3",
     "react-scripts": "4.0.3",
@@ -24,7 +26,7 @@
     "web-vitals": "^2.0.1"
   },
   "scripts": {
-    "start": "set PORT=5000 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -49,6 +51,7 @@
   },
   "devDependencies": {
     "@iconify-icons/simple-icons": "^1.1.28",
-    "@iconify/react": "^1.1.4"
+    "@iconify/react": "^1.1.4",
+    "babel-plugin-prismjs": "^2.0.1"
   }
 }
