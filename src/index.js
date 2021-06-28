@@ -7,6 +7,7 @@ import App from "./routes/App";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { createBreakpoints } from "@chakra-ui/theme-tools"
 import CodePage from "./routes/CodePage";
+import HighLighter from "./routes/HighLighter";
 // const hljs = require("highlight.js/lib/common");
 
 
@@ -31,7 +32,7 @@ ReactDOM.render(
   <ChakraProvider theme={theme}>
     <App/>
   </ChakraProvider>
-  <CodePage/>
+  <HighLighter/>
   </div>,
   document.getElementById("root")
 );
