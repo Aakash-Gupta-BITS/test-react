@@ -5,8 +5,8 @@ import firebase from "firebase";
 import { useToast } from "@chakra-ui/react";
 
 import LoginPage from "./LoginPage";
-import HomePage from "./homepage";
-import Loading from "../components/loading";
+import HomePage from "./HomePage";
+import Loading from "../components/Loading";
 import { reactLocalStorage } from "reactjs-localstorage";
 
 const RenderPages = ({
